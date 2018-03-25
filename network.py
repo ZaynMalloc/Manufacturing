@@ -25,9 +25,12 @@ plt.plot(T, Y1, c='r')
 plt.plot(T, Y2, c='b')
 plt.show()
 
-#Training loop
 
+#Training loop
 for i in range(1,1000):
     ri = np.random.randint(len(bitcoin_price))
     point = bitcoin_price[ri]
-    print(point)
+
+    z = bitcoin_price[0] * w1 + bitcoin_price[1] * w2 + b
+    h = sigmoid(z)
+    print(h)
