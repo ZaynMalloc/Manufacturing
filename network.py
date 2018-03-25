@@ -1,19 +1,19 @@
 from openpyxl import load_workbook
+import pandas as pd
+import numpy as np
 
-workbook_bitcoin = load_workbook('bitcoin_data.xlsx')
-workbook_video_games = load_workbook('video_game_sales.xlsx')
-workbook_shippment = load_workbook('shippment_data.xlsx')
+#Load workbooks
+workbook_bitcoin = pd.read_excel('bitcoin_data.xlsx', sheet_name = 0, usecols = 1)
+workbook_video_games = pd.read_excel('video_game_data.xlsx', sheet_name = 0, usecols = 1)
+workbook_shippment = pd.read_excel('shippment_data.xlsx', sheet_name = 0, usecols = 1)
 
-active_bitcoin = workbook_bitcoin.active
-active_video_games = workbook_video_games.active
-active_shippment = workbook_shippment.active
+print(workbook_video_games)
 
-time_bitcoin = active_bitcoin['A1:A24']
-price_bitcoin = active_bitcoin['B1:B24']
+#Sigmoid Function
+def sigmoid (x):
+    return 1/(1 + np.exp(-x))
 
-time_video_games = active_video_games['A1:A24']
-sales_video_games = active_video_games['B1:B24']
-
-time_shippment = active_shippment['A1:A24']
-amount_shippment = active_shippment['B1:B24']
+#Derivative of Sigmoid Function
+def derivatives_sigmoid(x):
+    return x * (1 - x)
 
