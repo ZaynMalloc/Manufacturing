@@ -9,6 +9,14 @@ data = [[415.16, 253, 2537.66], [672.48, 181.5,2705.605],
 [4764.87, 168, 2978],[4349.29, 316, 2997], 
 [13860.14, 1270, 2977]]
 '''
+'''
+data = [[2.62, 2.40, 3.40], [2.83, 2.26, 3.43], 
+[2.78, 2.37, 3.44],[2.99, 3.00, 3.44],
+[3.03, 2.69, 3.46], [3.40, 2.36, 3.47],
+[3.68, 2.23, 3.47],[3.63, 2.5, 3.47], 
+[4.14, 3.1, 3.48]]
+'''
+
 data = [[2.62, 2.40, 3.40], [2.83, 2.26, 3.43], 
 [2.78, 2.37, 3.44],[2.99, 3.00, 3.44],
 [3.03, 2.69, 3.46], [3.40, 2.36, 3.47],
@@ -16,9 +24,12 @@ data = [[2.62, 2.40, 3.40], [2.83, 2.26, 3.43],
 [4.14, 3.1, 3.48]]
 
 
-
 #We are going to make a prediction if bitcoin cost 8441.24 and there were 500 million video game sales
 today = [3.93, 2.70]
+
+#Activation function
+def activation_function(data_point, w1, w2, b):
+    return data_point[0] * w1 + data_point[1] * w2 + b
 
 #Sigmoid Function
 def sigmoid (x):
@@ -36,8 +47,8 @@ def train():
     b = np.random.randn()
     
     #Set parameters for the number of iterations and learning rate
-    iterations = 10000
-    learning_rate = 0.1
+    iterations = 100000
+    learning_rate = 0.00001
 
     #Create an array to track costs
     costs = [] 
@@ -58,7 +69,7 @@ def train():
         
         #Calculate cost
         cost = np.square(pred - target)
-     
+        
         # print the cost over all data points every 1k iters
         if i % 100 == 0:
             c = 0
@@ -94,7 +105,7 @@ def train():
 train()
 
 #Loading our today data to make a prediction
-'''
-prediction = sigmoid(today)
-print(today)
-'''
+
+prediction = sigmoid(activation_function(today, 0.101, 0.311, -0.142))
+print(prediction)
+
