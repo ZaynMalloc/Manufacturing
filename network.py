@@ -8,6 +8,9 @@ data = [[415.16, 253, 2537.66], [672.48, 181.5,2705.605],
 [4,764.87, 168, 2978],[4,349.29, 316, 2997], 
 [13,860.14, 1270, 2977]]
 
+#If we used our algorithim today
+today = [8,441.24, 500]
+
 #Sigmoid Function
 def sigmoid (x):
     return 1/(1 + np.exp(-x))
@@ -29,9 +32,10 @@ for i in range(len(data)):
 
 #Training loop
 
-learning_rate = 0.001
+learning_rate = 0.01
+costs = []
 
-for i in range(10000):
+for i in range(50000):
 
     w1 = np.random.randn()
     w2 = np.random.randn()
@@ -46,9 +50,8 @@ for i in range(10000):
     target = point[2]
     cost = np.square(pred - target)
 
-    if i % 1000 == 0:
-        print(cost)
-
+   
+    
     dcost_pred = 2 * (pred - target)
     dpred_dz = derivative_sigmoid(z)
     dz_dwl = point[0]
@@ -63,7 +66,9 @@ for i in range(10000):
  
     w1 = w1 - learning_rate * dcost_dw1
     w2 = w2 - learning_rate * dcost_dw2
+    b = b - learning_rate * dcost_db
 
-    print(point)
-    print(cost)
+    plt.plot(costs)
 
+prediction = sigmoid(today)
+print(today)
