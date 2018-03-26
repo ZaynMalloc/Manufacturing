@@ -19,23 +19,16 @@ def sigmoid (x):
 def derivative_sigmoid(x):
     return x * (1 - x)
 
-#Scatter Data
-'''
-for i in range(len(data)):
-    point = data[i]
-    plt.scatter(point[0], point[1])
-    plt.show()
-'''
-
 for i in range(len(data)):
     point = data[i]
 
-#Training loop
-
+#Training parameters
+iterations = 50000
 learning_rate = 0.01
 costs = []
 
-for i in range(50000):
+#Training loop
+for i in range(iterations):
 
     w1 = np.random.randn()
     w2 = np.random.randn()
