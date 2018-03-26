@@ -77,7 +77,6 @@ def train(desired_prediction):
         dcost_dpred = 2 * (pred - target)
         dpred_dz = derivative_sigmoid(z)
         
-
         dz_dw1 = point[0]
         dz_dw2 = point[1]
         dz_db = 1
@@ -88,6 +87,7 @@ def train(desired_prediction):
         dcost_dw2 = dcost_dz * dz_dw2
         dcost_db = dcost_dz * dz_db
         
+        #Setting weights and bias
         w1 = w1 - learning_rate * dcost_dw1
         w2 = w2 - learning_rate * dcost_dw2
         b = b - learning_rate * dcost_db
