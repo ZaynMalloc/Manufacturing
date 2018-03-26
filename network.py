@@ -12,7 +12,7 @@ data = [[415.16, 253, 2537.66], [672.48, 181.5,2705.605],
 data = [[2.62, 2.40, 3.40], [2.83, 2.26, 3.43], 
 [2.78, 2.37, 3.44],[2.99, 3.00, 3.44],
 [3.03, 2.69, 3.46], [3.40, 2.36, 3.47],
-[3.68, 2.23, 3.47],4,[3.63, 2.5, 3.47], 
+[3.68, 2.23, 3.47],[3.63, 2.5, 3.47], 
 [4.14, 3.1, 3.48]]
 
 
@@ -45,7 +45,8 @@ def train():
     for i in range(iterations):
         # Generate a random number and get a data point
         ri = np.random.randint(len(data))
-        
+        point = data[ri]
+
         #Once a random data point is choosen we calulate the activation function
         z = point[0] * w1 + point[1] * w2 + b
 
@@ -57,7 +58,7 @@ def train():
         
         #Calculate cost
         cost = np.square(pred - target)
-        
+     
         # print the cost over all data points every 1k iters
         if i % 100 == 0:
             c = 0
@@ -84,11 +85,13 @@ def train():
         w2 = w2 - learning_rate * dcost_dw2
         b = b - learning_rate * dcost_db
         
-    return costs, w1, w2, b
+    print(costs)
+    print(w1)
+    print(w2)
+    print(b)
 
 #Train and plot
-print(train())
-
+train()
 
 #Loading our today data to make a prediction
 '''
