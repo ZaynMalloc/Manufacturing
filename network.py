@@ -18,7 +18,7 @@ data = [[2.62, 2.40, 3.40], [2.83, 2.26, 3.43],
 
 
 #We are going to make a prediction if bitcoin cost 8441.24 and there were 500 million video game sales
-today = [3.93, 2/70]
+today = [3.93, 2.70]
 
 #Sigmoid Function
 def sigmoid (x):
@@ -35,22 +35,27 @@ def train():
     w2 = np.random.randn()
     b = np.random.randn()
     
+    #Set parameters for the number of iterations and learning rate
     iterations = 10000
     learning_rate = 0.1
-    costs = [] # keep costs during training, see if they go down
+
+    #Create an array to track costs
+    costs = [] 
     
     for i in range(iterations):
-        # get a random point
+        # Generate a random number and get a data point
         ri = np.random.randint(len(data))
-        point = data[ri]
-        print(point)
         
+        #Once a random data point is choosen we calulate the activation function
         z = point[0] * w1 + point[1] * w2 + b
-        pred = sigmoid(z) # networks prediction
+
+        #Set prediction by using the sigmoid function
+        pred = sigmoid(z)
         
+        #The target is the 2nd element (Shippments)
         target = point[2]
         
-        # cost for current random point
+        #Calculate cost
         cost = np.square(pred - target)
         
         # print the cost over all data points every 1k iters
@@ -82,12 +87,8 @@ def train():
     return costs, w1, w2, b
 
 #Train and plot
-costs, w1, w2, b = train()
+print(train())
 
-print(costs)
-print(w1)
-print(w2)
-print(b)
 
 #Loading our today data to make a prediction
 '''
