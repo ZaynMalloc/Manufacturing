@@ -47,7 +47,7 @@ def train():
     b = np.random.randn()
     
     #Set parameters for the number of iterations and learning rate
-    iterations = 100000
+    iterations = 250000
     learning_rate = 0.00001
 
     #Create an array to track costs
@@ -106,6 +106,5 @@ train()
 
 #Loading our today data to make a prediction
 
-prediction = sigmoid(activation_function(today, 0.101, 0.311, -0.142))
-print(prediction)
+print(activation_function(today, 0.2, 0.957, 0.749))
 
