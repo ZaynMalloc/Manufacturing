@@ -1,7 +1,7 @@
 from matplotlib import pyplot as plt
 import numpy as np
 
-#Here is our input data. The format is: [bitcoin price, video games sales]
+#Here is our original data. The format is: [bitcoin price, video games sales]
 '''
 data = [[415.16, 253, 2537.66], [672.48, 181.5,2705.605], 
 [608.44, 234.3,2730],[968.23, 997,2764.293],
@@ -9,13 +9,8 @@ data = [[415.16, 253, 2537.66], [672.48, 181.5,2705.605],
 [4764.87, 168, 2978],[4349.29, 316, 2997], 
 [13860.14, 1270, 2977]]
 '''
-'''
-data = [[2.62, 2.40, 3.40], [2.83, 2.26, 3.43], 
-[2.78, 2.37, 3.44],[2.99, 3.00, 3.44],
-[3.03, 2.69, 3.46], [3.40, 2.36, 3.47],
-[3.68, 2.23, 3.47],[3.63, 2.5, 3.47], 
-[4.14, 3.1, 3.48]]
-'''
+
+#Here is our data with a logarithm. The format is: [log(bitcoin price), log(video games sales)]
 
 data = [[2.62, 2.40, 3.40], [2.83, 2.26, 3.43], 
 [2.78, 2.37, 3.44],[2.99, 3.00, 3.44],
@@ -40,7 +35,7 @@ def derivative_sigmoid(x):
     return x * (1 - x)
 
 #Training 
-def train():
+def train(desired_prediction):
     #Get random weights
     w1 = np.random.randn()
     w2 = np.random.randn()
@@ -48,7 +43,7 @@ def train():
     
     #Set parameters for the number of iterations and learning rate
     iterations = 250000
-    learning_rate = 0.00001
+    learning_rate = 0.00005
 
     #Create an array to track costs
     costs = [] 
@@ -82,6 +77,7 @@ def train():
         dcost_dpred = 2 * (pred - target)
         dpred_dz = derivative_sigmoid(z)
         
+
         dz_dw1 = point[0]
         dz_dw2 = point[1]
         dz_db = 1
@@ -95,16 +91,16 @@ def train():
         w1 = w1 - learning_rate * dcost_dw1
         w2 = w2 - learning_rate * dcost_dw2
         b = b - learning_rate * dcost_db
-        
+    
+    print()
+    print('Costs, weights, and bias')
     print(costs)
     print(w1)
     print(w2)
     print(b)
+    print()
+    print('Prediction')
+    print(activation_function(desired_prediction, w1, w2, b))
 
 #Train and plot
-train()
-
-#Loading our today data to make a prediction
-
-print(activation_function(today, 0.2, 0.957, 0.749))
-
+train(today)
