@@ -1,7 +1,10 @@
 from matplotlib import pyplot as plt
 import numpy as np
 
-#Here is our original data. The format is: [bitcoin price, video games sales]
+#Here is our original data. The format is: [bitcoin price, video games sales, wafer shippments]
+#Dollars is the unit for bitcoin price
+#Millions of Dollars is the unit for video game sales
+#Million of Square Inches (MSI) is the unit for wafer shippments
 '''
 data = [[415.16, 253, 2537.66], [672.48, 181.5,2705.605], 
 [608.44, 234.3,2730],[968.23, 997,2764.293],
@@ -11,13 +14,11 @@ data = [[415.16, 253, 2537.66], [672.48, 181.5,2705.605],
 '''
 
 #Here is our data with a logarithm. The format is: [log(bitcoin price), log(video games sales)]
-
 data = [[2.62, 2.40, 3.40], [2.83, 2.26, 3.43], 
 [2.78, 2.37, 3.44],[2.99, 3.00, 3.44],
 [3.03, 2.69, 3.46], [3.40, 2.36, 3.47],
 [3.68, 2.23, 3.47],[3.63, 2.5, 3.47], 
 [4.14, 3.1, 3.48]]
-
 
 #We are going to make a prediction if bitcoin cost 8441.24 and there were 500 million video game sales
 today = [3.93, 2.70]
@@ -42,7 +43,7 @@ def train(desired_prediction):
     b = np.random.randn()
     
     #Set parameters for the number of iterations and learning rate
-    iterations = 250000
+    iterations = 550000
     learning_rate = 0.00005
 
     #Create an array to track costs
@@ -65,7 +66,7 @@ def train(desired_prediction):
         #Calculate cost
         cost = np.square(pred - target)
         
-        # print the cost over all data points every 1k iters
+        #Print the cost over all data points every 1k iters
         if i % 100 == 0:
             c = 0
             for j in range(len(data)):
@@ -74,6 +75,7 @@ def train(desired_prediction):
                 c += np.square(p_pred - p[2])
             costs.append(c)
         
+        #Calculate the gradient descent
         dcost_dpred = 2 * (pred - target)
         dpred_dz = derivative_sigmoid(z)
         
@@ -100,7 +102,7 @@ def train(desired_prediction):
     print(b)
     print()
     print('Prediction')
-    print(activation_function(desired_prediction, w1, w2, b))
+    print(10**activation_function(desired_prediction, w1, w2, b))
 
 #Train and plot
 train(today)
